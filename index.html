@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커트켓(Cutket) - 프로 영상편집</title>
+    <style>
+        /* 아트머그 상세페이지 임베드용 스타일 리셋 */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER & NAV ===== */
+        header {
+            display: none;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-bottom: 2px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🐱";
+            font-size: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, rgba(20,20,20,0.9) 0%, rgba(40,40,40,0.9) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23333" stroke-width="0.5"/></pattern></defs><rect width="1200" height="600" fill="%230a0a0a"/><rect width="1200" height="600" fill="url(%23grid)"/></svg>');
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .tag {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #d0d0d0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            padding: 60px 0;
+        }
+
+        /* ===== PORTFOLIO SECTION ===== */
+        .portfolio-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+        }
+
+        .portfolio-item {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            border-color: #555;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+
+        .portfolio-thumbnail {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 60px 0;
+            border-bottom: 2px solid #333;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: #555;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* ===== PROFILE SECTION ===== */
+        .profile-box {
+            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            position: sticky;
+            top: 100px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            border: 2px solid #444;
+        }
+
+        .profile-box h2 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .profile-box .status {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            color: #888;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .status.active {
+            background: rgba(100, 200, 100, 0.1);
+            border-color: #64c864;
+            color: #88ff88;
+        }
+
+        .profile-bio {
+            color: #888;
+            font-size: 14px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .stat {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* ===== PRICING SECTION ===== */
+        .pricing-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 60px 0;
+            border-bottom: 2px solid #333;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .price-card {
+            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            border-color: #666;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .price-card.featured {
+            border-color: #666;
+            box-shadow: 0 0 30px rgba(255,255,255,0.1);
+        }
+
+        .price-card h3 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .price-tag {
+            font-size: 36px;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .price-tag span {
+            font-size: 16px;
+            color: #888;
+        }
+
+        .price-features {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .price-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+
+        .price-features li::before {
+            content: "✓ ";
+            color: #666;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* ===== CTA BUTTONS ===== */
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+            color: #fff;
+            border: 2px solid #555;
+        }
+
+        .btn-primary:hover {
+            border-color: #777;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        .btn-contact {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: #fff;
+            border: 2px solid #444;
+        }
+
+        .btn-contact:hover {
+            border-color: #666;
+            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
+        }
+
+        /* ===== DETAILS SECTION ===== */
+        .details-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 60px 0;
+            border-bottom: 2px solid #333;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .detail-item {
+            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
+            border-left: 3px solid #444;
+            padding: 25px;
+            border-radius: 4px;
+        }
+
+        .detail-item h4 {
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .detail-item p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* ===== REVIEWS SECTION ===== */
+        .reviews-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 60px 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .review-rating {
+            color: #ffc107;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .review-text {
+            color: #a0a0a0;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .review-author {
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-box {
+                position: static;
+                margin-bottom: 40px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- INTRO TITLE -->
+        <div style="text-align: center; margin-bottom: 50px; padding: 20px 0; border-bottom: 2px solid #333;">
+            <h1 style="font-size: 36px; color: #fff; margin-bottom: 15px;">🐱 커트켓(Cutket)</h1>
+            <p style="font-size: 16px; color: #999; margin-bottom: 12px;">검은 고양이처럼 빠르고 정확한 영상편집 전문가</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
+                <span class="tag">유튜브 편집</span>
+                <span class="tag">스트리밍 자막</span>
+                <span class="tag">광고 영상</span>
+                <span class="tag">색감 보정</span>
+                <span class="tag">음향 작업</span>
+            </div>
+        </div>
+
+        <!-- SERVICES -->
+        <div style="margin-bottom: 50px;">
+            <h2 class="section-title">📌 제공 서비스</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎥</div>
+                    <h3>유튜브 편집</h3>
+                    <p>자막, 효과음, 전환 효과로 시청자 집중도 극대화</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📺</div>
+                    <h3>스트리밍 편집</h3>
+                    <p>실시간 방송 자막, 하이라이트 편집, VOD 제작</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📢</div>
+                    <h3>광고·프로모션</h3>
+                    <p>임팩트 있는 광고 영상으로 브랜드 가치 상승</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRICING -->
+        <div style="margin-bottom: 50px; padding: 30px 0; border: 1px solid #333; border-radius: 8px; padding: 30px;">
+            <h2 class="section-title">💰 가격 안내</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>라이트 패키지</h3>
+                    <div class="price-tag">50,000 <span>원/건</span></div>
+                    <p style="color: #888; margin: 10px 0 20px; font-size: 13px;">최대 10분 영상</p>
+                    <ul class="price-features">
+                        <li>기본 자막 추가</li>
+                        <li>색감 보정</li>
+                        <li>배경음악 추가</li>
+                        <li>간단한 효과음</li>
+                    </ul>
+                </div>
+
+                <div class="price-card featured">
+                    <h3>프로 패키지 ⭐</h3>
+                    <div class="price-tag">120,000 <span>원/건</span></div>
+                    <p style="color: #888; margin: 10px 0 20px; font-size: 13px;">최대 30분 영상</p>
+                    <ul class="price-features">
+                        <li>고급 자막 디자인</li>
+                        <li>전문 색감 그레이딩</li>
+                        <li>음향 작업 포함</li>
+                        <li>효과음 & 전환 효과</li>
+                        <li>1회 수정</li>
+                    </ul>
+                </div>
+
+                <div class="price-card">
+                    <h3>옵션 추가</h3>
+                    <div class="price-tag">30,000+ <span>원</span></div>
+                    <p style="color: #888; margin: 10px 0 20px; font-size: 13px;">개별 작업</p>
+                    <ul class="price-features">
+                        <li>고급 색감 보정</li>
+                        <li>자막 추가 디자인</li>
+                        <li>음향 마스터링</li>
+                        <li>VFX 효과</li>
+                    </ul>
+                </div>
+
+                <div class="price-card featured">
+                    <h3>프리미엄 패키지</h3>
+                    <div class="price-tag">300,000+ <span>원</span></div>
+                    <p style="color: #888; margin: 10px 0 20px; font-size: 13px;">무제한 길이</p>
+                    <ul class="price-features">
+                        <li>풀 컬러 그레이딩</li>
+                        <li>프리미엄 자막</li>
+                        <li>전문 음향 설계</li>
+                        <li>무제한 수정</li>
+                        <li>긴급 작업 가능</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAILS -->
+        <div style="margin-bottom: 50px;">
+            <h2 class="section-title">📋 작업 안내</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h4>⏱️ 작업 기간</h4>
+                    <p>일반: 3~5일 / 프리미엄: 상담 후 결정 / 긴급 작업 가능</p>
+                </div>
+                <div class="detail-item">
+                    <h4>📝 수정 정책</h4>
+                    <p>패키지별 수정 횟수 상이 / 추가 수정은 별도 비용</p>
+                </div>
+                <div class="detail-item">
+                    <h4>📂 지원 형식</h4>
+                    <p>MP4, MOV, MKV 등 대부분 형식 지원</p>
+                </div>
+                <div class="detail-item">
+                    <h4>📤 제공 방식</h4>
+                    <p>Google Drive / Dropbox / 이메일 등</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE INFO -->
+        <div style="background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%); border: 2px solid #333; border-radius: 12px; padding: 30px; text-align: center; margin-bottom: 30px;">
+            <div style="font-size: 50px; margin-bottom: 15px;">🐱</div>
+            <h2 style="font-size: 22px; color: #fff; margin-bottom: 10px;">커트켓 Cutket</h2>
+            <p style="color: #888; font-size: 13px; margin-bottom: 15px;">초보 유튜버부터 기업 마케팅까지 모든 영상편집을 도와드립니다. 빠른 응답과 정성 있는 작업이 제 약속입니다.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; padding-top: 15px; border-top: 1px solid #333;">
+                <div>
+                    <div style="font-size: 12px; color: #888;">완료 작업</div>
+                    <div style="font-size: 20px; color: #fff; font-weight: bold;">150+</div>
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: #888;">만족도</div>
+                    <div style="font-size: 20px; color: #fff; font-weight: bold;">99%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
