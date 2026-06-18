@@ -1,670 +1,592 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>커트켓(Cutket) - 프로 영상편집</title>
-    <style>
-        /* 아트머그 상세페이지 임베드용 스타일 리셋 */
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-
-        /* ===== HEADER & NAV ===== */
-        header {
-            display: none;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            border-bottom: 2px solid #333;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo::before {
-            content: "🐱";
-            font-size: 32px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #b0b0b0;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            background: linear-gradient(135deg, rgba(20,20,20,0.9) 0%, rgba(40,40,40,0.9) 100%), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23333" stroke-width="0.5"/></pattern></defs><rect width="1200" height="600" fill="%230a0a0a"/><rect width="1200" height="600" fill="url(%23grid)"/></svg>');
-            padding: 100px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            color: #fff;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #a0a0a0;
-            margin-bottom: 30px;
-        }
-
-        .hero-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
-
-        .tag {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            color: #d0d0d0;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-        }
-
-        /* ===== MAIN CONTAINER ===== */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            padding: 60px 0;
-        }
-
-        /* ===== PORTFOLIO SECTION ===== */
-        .portfolio-showcase {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 60px;
-            padding: 40px 0;
-            border-top: 2px solid #333;
-            border-bottom: 2px solid #333;
-        }
-
-        .portfolio-item {
-            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
-            height: 200px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-item:hover {
-            border-color: #555;
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
-            transform: translateY(-5px);
-        }
-
-        .portfolio-thumbnail {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-        }
-
-        /* ===== SERVICES SECTION ===== */
-        .services {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            padding: 60px 0;
-            border-bottom: 2px solid #333;
-        }
-
-        .section-title {
-            font-size: 32px;
-            color: #fff;
-            margin-bottom: 40px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .service-card {
-            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .service-card:hover {
-            border-color: #555;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transform: translateY(-10px);
-        }
-
-        .service-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .service-card h3 {
-            font-size: 18px;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .service-card p {
-            font-size: 14px;
-            color: #888;
-            line-height: 1.6;
-        }
-
-        /* ===== PROFILE SECTION ===== */
-        .profile-box {
-            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-            border: 2px solid #333;
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            position: sticky;
-            top: 100px;
-        }
-
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            border: 2px solid #444;
-        }
-
-        .profile-box h2 {
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
-        .profile-box .status {
-            background: #1a1a1a;
-            border: 1px solid #444;
-            color: #888;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .status.active {
-            background: rgba(100, 200, 100, 0.1);
-            border-color: #64c864;
-            color: #88ff88;
-        }
-
-        .profile-bio {
-            color: #888;
-            font-size: 14px;
-            margin: 20px 0;
-            line-height: 1.8;
-        }
-
-        .profile-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 25px 0;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-        }
-
-        .stat {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 5px;
-        }
-
-        .stat-value {
-            font-size: 20px;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        /* ===== PRICING SECTION ===== */
-        .pricing-section {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            padding: 60px 0;
-            border-bottom: 2px solid #333;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .price-card {
-            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-            border: 2px solid #333;
-            border-radius: 12px;
-            padding: 35px;
-            transition: all 0.3s ease;
-        }
-
-        .price-card:hover {
-            border-color: #666;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-        }
-
-        .price-card.featured {
-            border-color: #666;
-            box-shadow: 0 0 30px rgba(255,255,255,0.1);
-        }
-
-        .price-card h3 {
-            font-size: 20px;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .price-tag {
-            font-size: 36px;
-            color: #fff;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .price-tag span {
-            font-size: 16px;
-            color: #888;
-        }
-
-        .price-features {
-            list-style: none;
-            margin: 25px 0;
-        }
-
-        .price-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #333;
-            color: #a0a0a0;
-            font-size: 14px;
-        }
-
-        .price-features li::before {
-            content: "✓ ";
-            color: #666;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-
-        /* ===== CTA BUTTONS ===== */
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 14px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
-            color: #fff;
-            border: 2px solid #555;
-        }
-
-        .btn-primary:hover {
-            border-color: #777;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-        }
-
-        .btn-contact {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            color: #fff;
-            border: 2px solid #444;
-        }
-
-        .btn-contact:hover {
-            border-color: #666;
-            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-        }
-
-        /* ===== DETAILS SECTION ===== */
-        .details-section {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            padding: 60px 0;
-            border-bottom: 2px solid #333;
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .detail-item {
-            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-            border-left: 3px solid #444;
-            padding: 25px;
-            border-radius: 4px;
-        }
-
-        .detail-item h4 {
-            color: #fff;
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-
-        .detail-item p {
-            color: #888;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        /* ===== REVIEWS SECTION ===== */
-        .reviews-section {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            padding: 60px 0;
-        }
-
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .review-card {
-            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 25px;
-        }
-
-        .review-rating {
-            color: #ffc107;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .review-text {
-            color: #a0a0a0;
-            font-size: 14px;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .review-author {
-            color: #666;
-            font-size: 13px;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .services-grid,
-            .reviews-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .profile-box {
-                position: static;
-                margin-bottom: 40px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .nav-links {
-                gap: 15px;
-                font-size: 13px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUTCAT 영상편집 상세페이지</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    background:#050505;
+    color:#fff;
+    line-height:1.65;
+}
+a{text-decoration:none;color:inherit}
+
+.page{
+    background:
+    radial-gradient(circle at 12% 0%,rgba(255,208,0,.22),transparent 24%),
+    radial-gradient(circle at 90% 12%,rgba(255,208,0,.1),transparent 20%),
+    linear-gradient(180deg,#050505 0%,#101010 45%,#050505 100%);
+    overflow:hidden;
+}
+
+.section{
+    width:min(1180px,calc(100% - 32px));
+    margin:0 auto;
+    padding:78px 0;
+}
+
+.hero{
+    width:min(1180px,calc(100% - 32px));
+    margin:0 auto;
+    min-height:620px;
+    display:flex;
+    align-items:center;
+    padding:80px 0 60px;
+    position:relative;
+}
+
+.hero:before{
+    content:"";
+    position:absolute;
+    inset:35px -80px;
+    background:
+    linear-gradient(135deg,rgba(255,208,0,.18),transparent 18%),
+    repeating-linear-gradient(-12deg,rgba(255,208,0,.08) 0 2px,transparent 2px 14px);
+    opacity:.45;
+    transform:skewY(-3deg);
+    pointer-events:none;
+}
+
+.hero-box{
+    position:relative;
+    z-index:1;
+    width:100%;
+    padding:56px;
+    border-radius:34px;
+    background:
+    linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025)),
+    linear-gradient(135deg,rgba(255,208,0,.13),transparent 35%);
+    border:1px solid rgba(255,208,0,.25);
+    box-shadow:0 30px 90px rgba(0,0,0,.62);
+}
+
+.badge{
+    display:inline-flex;
+    padding:8px 15px;
+    border-radius:999px;
+    background:#ffd000;
+    color:#111;
+    font-size:13px;
+    font-weight:950;
+    letter-spacing:1px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(56px,10vw,126px);
+    line-height:.9;
+    letter-spacing:-5px;
+    font-weight:950;
+}
+.hero h1 span{color:#ffd000}
+
+.hero p{
+    margin-top:25px;
+    color:#ddd;
+    font-size:clamp(16px,2vw,22px);
+    max-width:720px;
+    font-weight:700;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:34px;
+}
+
+.btn{
+    min-height:54px;
+    padding:0 25px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    font-weight:950;
+    transition:.25s;
+}
+.btn:hover{transform:translateY(-3px)}
+.btn-main{background:#ffd000;color:#111}
+.btn-sub{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+
+.title{text-align:center;margin-bottom:38px}
+.title .mini{
+    color:#ffd000;
+    font-size:13px;
+    font-weight:950;
+    letter-spacing:2px;
+}
+.title h2{
+    margin-top:8px;
+    font-size:clamp(32px,5vw,58px);
+    letter-spacing:-2px;
+    font-weight:950;
+}
+.title p{color:#aaa;margin-top:10px}
+
+.grid{display:grid;gap:18px}
+
+.card{
+    border-radius:24px;
+    padding:28px;
+    background:linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 18px 52px rgba(0,0,0,.32);
+    position:relative;
+    overflow:hidden;
+}
+
+.card:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg,#ffd000,transparent);
+}
+
+.card h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+.card p{
+    color:#bdbdbd;
+    font-size:15px;
+}
+
+.service-grid{grid-template-columns:repeat(4,1fr)}
+.portfolio-grid{grid-template-columns:repeat(4,1fr)}
+.price-grid{grid-template-columns:repeat(4,1fr)}
+.process-grid{grid-template-columns:repeat(4,1fr)}
+.notice-grid{grid-template-columns:repeat(2,1fr)}
+
+.shorts-box{
+    border-radius:26px;
+    overflow:hidden;
+    background:#101010;
+    border:1px solid rgba(255,208,0,.25);
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.shorts-ratio{
+    width:100%;
+    aspect-ratio:9/16;
+    position:relative;
+    background:
+    linear-gradient(135deg,rgba(255,208,0,.16),transparent),
+    #141414;
+}
+
+.shorts-ratio iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+.shorts-caption{
+    padding:15px 16px;
+    font-weight:950;
+    color:#ffd000;
+    text-align:center;
+}
+
+.price-card:after{
+    content:"";
+    position:absolute;
+    right:-35px;
+    top:-35px;
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    background:rgba(255,208,0,.13);
+}
+.price-name{
+    color:#ffd000;
+    font-weight:950;
+    font-size:15px;
+    position:relative;
+    z-index:1;
+}
+.price{
+    font-size:clamp(30px,4vw,42px);
+    font-weight:950;
+    margin:12px 0;
+    position:relative;
+    z-index:1;
+}
+.price span{
+    font-size:15px;
+    color:#aaa;
+}
+.price-card p{position:relative;z-index:1}
+
+.process-num{
+    color:#ffd000;
+    font-weight:950;
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+.form-wrap{
+    max-width:780px;
+    margin:0 auto;
+}
+.form-box label{
+    display:block;
+    color:#ffd000;
+    font-weight:950;
+    margin:14px 0 7px;
+}
+.form-box input,
+.form-box textarea{
+    width:100%;
+    border:1px solid rgba(255,255,255,.16);
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    border-radius:14px;
+    padding:15px;
+    font-size:15px;
+    outline:none;
+}
+.form-box textarea{
+    min-height:86px;
+    resize:vertical;
+}
+.copy-btn{
+    width:100%;
+    min-height:58px;
+    margin-top:20px;
+    border:0;
+    border-radius:16px;
+    background:#ffd000;
+    color:#111;
+    font-size:16px;
+    font-weight:950;
+    cursor:pointer;
+}
+.copy-result{
+    display:none;
+    margin-top:14px;
+    padding:16px;
+    border-radius:16px;
+    background:rgba(255,208,0,.1);
+    border:1px solid rgba(255,208,0,.35);
+    color:#ffd000;
+    text-align:center;
+    font-weight:950;
+}
+
+.footer{
+    text-align:center;
+    padding:60px 16px 90px;
+    color:#aaa;
+}
+.footer strong{
+    display:block;
+    color:#ffd000;
+    font-size:30px;
+    margin-bottom:8px;
+    font-weight:950;
+}
+
+@media(max-width:1024px){
+    .hero-box{padding:42px}
+    .service-grid,.price-grid,.process-grid{grid-template-columns:repeat(2,1fr)}
+    .portfolio-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:720px){
+    .section{width:min(100% - 24px,1180px);padding:56px 0}
+    .hero{width:min(100% - 24px,1180px);min-height:auto;padding:48px 0 30px}
+    .hero-box{padding:30px 22px;border-radius:26px}
+    .hero h1{letter-spacing:-2px}
+    .hero-buttons{flex-direction:column}
+    .btn{width:100%}
+    .service-grid,.portfolio-grid,.price-grid,.process-grid,.notice-grid{grid-template-columns:1fr}
+    .card{padding:22px;border-radius:20px}
+    .shorts-box{
+        max-width:360px;
+        margin:0 auto;
+        width:100%;
+    }
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- INTRO TITLE -->
-        <div style="text-align: center; margin-bottom: 50px; padding: 20px 0; border-bottom: 2px solid #333;">
-            <h1 style="font-size: 36px; color: #fff; margin-bottom: 15px;">🐱 커트켓(Cutket)</h1>
-            <p style="font-size: 16px; color: #999; margin-bottom: 12px;">검은 고양이처럼 빠르고 정확한 영상편집 전문가</p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
-                <span class="tag">유튜브 편집</span>
-                <span class="tag">스트리밍 자막</span>
-                <span class="tag">광고 영상</span>
-                <span class="tag">색감 보정</span>
-                <span class="tag">음향 작업</span>
+<div class="page">
+
+<section class="hero">
+    <div class="hero-box">
+        <div class="badge">BLACK CAT VIDEO EDITOR</div>
+        <h1>
+            CUT<span>CAT</span><br>
+            VIDEO<br>
+            EDITING
+        </h1>
+        <p>
+            쇼츠, 롱폼, 방송 하이라이트, 게임 영상까지 짧고 강렬하게, 깔끔하고 빠르게 편집해드립니다.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#portfolio" class="btn btn-main">포트폴리오 보기</a>
+            <a href="#price" class="btn btn-sub">가격 안내</a>
+            <a href="#form" class="btn btn-sub">신청 양식</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="title">
+        <div class="mini">SERVICE</div>
+        <h2>작업 가능 분야</h2>
+        <p>컷편집, 자막, 효과음, BGM, 색보정까지 영상 분위기에 맞춰 작업합니다.</p>
+    </div>
+
+    <div class="grid service-grid">
+        <div class="card">
+            <h3>쇼츠 편집</h3>
+            <p>짧은 시간 안에 핵심이 보이도록 빠르고 강렬하게 편집합니다.</p>
+        </div>
+        <div class="card">
+            <h3>롱폼 편집</h3>
+            <p>영상 흐름을 정리하고 시청자가 보기 편하게 구성합니다.</p>
+        </div>
+        <div class="card">
+            <h3>방송 하이라이트</h3>
+            <p>재미있는 장면과 리액션을 살려 자막과 효과음으로 강조합니다.</p>
+        </div>
+        <div class="card">
+            <h3>게임 영상</h3>
+            <p>킬장면, 웃긴 장면, 몰입되는 장면을 템포감 있게 편집합니다.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="portfolio">
+    <div class="title">
+        <div class="mini">PORTFOLIO</div>
+        <h2>포트폴리오</h2>
+        <p>쇼츠 포트폴리오에 맞춰 세로형 9:16 비율로 구성했습니다.</p>
+    </div>
+
+    <div class="grid portfolio-grid">
+        <div class="shorts-box">
+            <div class="shorts-ratio">
+                <iframe src="YOUTUBE_SHORTS_LINK_1" allowfullscreen></iframe>
             </div>
+            <div class="shorts-caption">쇼츠 포트폴리오 01</div>
         </div>
 
-        <!-- SERVICES -->
-        <div style="margin-bottom: 50px;">
-            <h2 class="section-title">📌 제공 서비스</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🎥</div>
-                    <h3>유튜브 편집</h3>
-                    <p>자막, 효과음, 전환 효과로 시청자 집중도 극대화</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📺</div>
-                    <h3>스트리밍 편집</h3>
-                    <p>실시간 방송 자막, 하이라이트 편집, VOD 제작</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📢</div>
-                    <h3>광고·프로모션</h3>
-                    <p>임팩트 있는 광고 영상으로 브랜드 가치 상승</p>
-                </div>
+        <div class="shorts-box">
+            <div class="shorts-ratio">
+                <iframe src="YOUTUBE_SHORTS_LINK_2" allowfullscreen></iframe>
             </div>
+            <div class="shorts-caption">쇼츠 포트폴리오 02</div>
         </div>
 
-        <!-- PRICING -->
-        <div style="margin-bottom: 50px; padding: 30px 0; border: 1px solid #333; border-radius: 8px; padding: 30px;">
-            <h2 class="section-title">💰 가격 안내</h2>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <h3>라이트 패키지</h3>
-                    <div class="price-tag">50,000 <span>원/건</span></div>
-                    <p style="color: #888; margin: 10px 0 20px; font-size: 13px;">최대 10분 영상</p>
-                    <ul class="price-features">
-                        <li>기본 자막 추가</li>
-                        <li>색감 보정</li>
-                        <li>배경음악 추가</li>
-                        <li>간단한 효과음</li>
-                    </ul>
-                </div>
-
-                <div class="price-card featured">
-                    <h3>프로 패키지 ⭐</h3>
-                    <div class="price-tag">120,000 <span>원/건</span></div>
-                    <p style="color: #888; margin: 10px 0 20px; font-size: 13px;">최대 30분 영상</p>
-                    <ul class="price-features">
-                        <li>고급 자막 디자인</li>
-                        <li>전문 색감 그레이딩</li>
-                        <li>음향 작업 포함</li>
-                        <li>효과음 & 전환 효과</li>
-                        <li>1회 수정</li>
-                    </ul>
-                </div>
-
-                <div class="price-card">
-                    <h3>옵션 추가</h3>
-                    <div class="price-tag">30,000+ <span>원</span></div>
-                    <p style="color: #888; margin: 10px 0 20px; font-size: 13px;">개별 작업</p>
-                    <ul class="price-features">
-                        <li>고급 색감 보정</li>
-                        <li>자막 추가 디자인</li>
-                        <li>음향 마스터링</li>
-                        <li>VFX 효과</li>
-                    </ul>
-                </div>
-
-                <div class="price-card featured">
-                    <h3>프리미엄 패키지</h3>
-                    <div class="price-tag">300,000+ <span>원</span></div>
-                    <p style="color: #888; margin: 10px 0 20px; font-size: 13px;">무제한 길이</p>
-                    <ul class="price-features">
-                        <li>풀 컬러 그레이딩</li>
-                        <li>프리미엄 자막</li>
-                        <li>전문 음향 설계</li>
-                        <li>무제한 수정</li>
-                        <li>긴급 작업 가능</li>
-                    </ul>
-                </div>
+        <div class="shorts-box">
+            <div class="shorts-ratio">
+                <iframe src="YOUTUBE_SHORTS_LINK_3" allowfullscreen></iframe>
             </div>
+            <div class="shorts-caption">쇼츠 포트폴리오 03</div>
         </div>
 
-        <!-- DETAILS -->
-        <div style="margin-bottom: 50px;">
-            <h2 class="section-title">📋 작업 안내</h2>
-            <div class="details-grid">
-                <div class="detail-item">
-                    <h4>⏱️ 작업 기간</h4>
-                    <p>일반: 3~5일 / 프리미엄: 상담 후 결정 / 긴급 작업 가능</p>
-                </div>
-                <div class="detail-item">
-                    <h4>📝 수정 정책</h4>
-                    <p>패키지별 수정 횟수 상이 / 추가 수정은 별도 비용</p>
-                </div>
-                <div class="detail-item">
-                    <h4>📂 지원 형식</h4>
-                    <p>MP4, MOV, MKV 등 대부분 형식 지원</p>
-                </div>
-                <div class="detail-item">
-                    <h4>📤 제공 방식</h4>
-                    <p>Google Drive / Dropbox / 이메일 등</p>
-                </div>
+        <div class="shorts-box">
+            <div class="shorts-ratio">
+                <iframe src="YOUTUBE_SHORTS_LINK_4" allowfullscreen></iframe>
             </div>
+            <div class="shorts-caption">쇼츠 포트폴리오 04</div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="price">
+    <div class="title">
+        <div class="mini">PRICE</div>
+        <h2>가격 안내</h2>
+        <p>편집점 O는 편집하실 부분을 의뢰자님께서 알려주시는 방식입니다.</p>
+    </div>
+
+    <div class="grid price-grid">
+        <div class="card price-card">
+            <div class="price-name">쇼츠 / 편집점 O</div>
+            <div class="price">7,000원</div>
+            <p>편집하실 부분, 재미있었던 장면, 강조하고 싶은 부분을 알려주시면 됩니다.</p>
         </div>
 
-        <!-- PROFILE INFO -->
-        <div style="background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%); border: 2px solid #333; border-radius: 12px; padding: 30px; text-align: center; margin-bottom: 30px;">
-            <div style="font-size: 50px; margin-bottom: 15px;">🐱</div>
-            <h2 style="font-size: 22px; color: #fff; margin-bottom: 10px;">커트켓 Cutket</h2>
-            <p style="color: #888; font-size: 13px; margin-bottom: 15px;">초보 유튜버부터 기업 마케팅까지 모든 영상편집을 도와드립니다. 빠른 응답과 정성 있는 작업이 제 약속입니다.</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; padding-top: 15px; border-top: 1px solid #333;">
-                <div>
-                    <div style="font-size: 12px; color: #888;">완료 작업</div>
-                    <div style="font-size: 20px; color: #fff; font-weight: bold;">150+</div>
-                </div>
-                <div>
-                    <div style="font-size: 12px; color: #888;">만족도</div>
-                    <div style="font-size: 20px; color: #fff; font-weight: bold;">99%</div>
-                </div>
+        <div class="card price-card">
+            <div class="price-name">쇼츠 / 편집점 X</div>
+            <div class="price">10,000원</div>
+            <p>원본 영상을 확인 후 편집자가 직접 사용할 구간을 선정하여 편집합니다.</p>
+        </div>
+
+        <div class="card price-card">
+            <div class="price-name">롱폼 / 편집점 O</div>
+            <div class="price">8,000원 <span>/ 1분당</span></div>
+            <p>편집하실 구간을 알려주시면 해당 내용을 기준으로 작업합니다.</p>
+        </div>
+
+        <div class="card price-card">
+            <div class="price-name">롱폼 / 편집점 X</div>
+            <div class="price">13,000원 <span>/ 1분당</span></div>
+            <p>전체 영상을 확인 후 흐름에 맞게 편집점을 잡아 작업합니다.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="title">
+        <div class="mini">PROCESS</div>
+        <h2>작업 진행 순서</h2>
+    </div>
+
+    <div class="grid process-grid">
+        <div class="card">
+            <div class="process-num">01</div>
+            <h3>문의</h3>
+            <p>아래 신청 양식을 작성한 후 아트머그 문의로 전달해주세요.</p>
+        </div>
+
+        <div class="card">
+            <div class="process-num">02</div>
+            <h3>확인 및 결제</h3>
+            <p>전달해주신 내용을 확인한 후 작업 가능 여부와 금액을 안내드립니다.</p>
+        </div>
+
+        <div class="card">
+            <div class="process-num">03</div>
+            <h3>편집 작업</h3>
+            <p>결제 확인 후 요청 내용에 맞춰 영상 편집을 진행합니다.</p>
+        </div>
+
+        <div class="card">
+            <div class="process-num">04</div>
+            <h3>완성본 전달</h3>
+            <p>작업 완료 후 완성된 영상 파일을 전달드립니다.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="title">
+        <div class="mini">NOTICE</div>
+        <h2>작업 안내</h2>
+    </div>
+
+    <div class="grid notice-grid">
+        <div class="card">
+            <h3>BGM 안내</h3>
+            <p>
+                영상 제작 시 저작권 표시가 필요한 BGM이 사용될 수 있습니다.
+                사용된 음원 라이선스에 따라 영상 설명란 또는 고정댓글 등에 출처 표기가 필요할 수 있습니다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>저작권 안내</h3>
+            <p>
+                의뢰자님께서 제공해주신 일러스트, 이미지, 영상, 음원 등의 저작권 및 사용 권한에 대한 책임은 의뢰자님께 있습니다.
+                편집자는 제공받은 자료의 저작권 문제에 대한 책임을 지지 않습니다.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="form">
+    <div class="title">
+        <div class="mini">ORDER FORM</div>
+        <h2>신청 양식</h2>
+        <p>작성 후 복사하기 버튼을 누른 뒤, 아트머그 문의로 전달해주세요.</p>
+    </div>
+
+    <div class="form-wrap">
+        <div class="card form-box">
+            <label>1. 영상 전달 해줄 수 있는 링크</label>
+            <input id="videoLink" type="text" placeholder="예: 구글드라이브, 유튜브 일부공개, 파일 링크 등">
+
+            <label>2. 원하는 영상의 길이</label>
+            <input id="videoLength" type="text" placeholder="예: 쇼츠 60초 / 쇼츠 180초 / 롱폼 5분 등">
+
+            <label>3. 영상에 쓰일 소스 링크</label>
+            <textarea id="sourceLink" placeholder="예: 인트로 영상, 아웃트로, 이미지, 로고, 일러스트, 효과음 링크 등"></textarea>
+
+            <label>4. 업로드 예정 채널 링크</label>
+            <input id="channelLink" type="text" placeholder="예: 유튜브, 치지직, 트위치, 틱톡, 인스타 등">
+
+            <button class="copy-btn" type="button" onclick="copyOrderForm()">신청 양식 복사하기</button>
+
+            <div id="copyResult" class="copy-result">
+                복사 완료되었습니다.<br>
+                이걸로 아트머그에 문의 후 신청해주세요.
             </div>
         </div>
     </div>
+</section>
+
+<footer class="footer">
+    <strong>CUTCAT</strong>
+    빠르고 깔끔한 영상 편집을 도와드립니다.
+</footer>
+
+</div>
+
+<script>
+function getOrderText(){
+    const videoLink = document.getElementById("videoLink").value.trim();
+    const videoLength = document.getElementById("videoLength").value.trim();
+    const sourceLink = document.getElementById("sourceLink").value.trim();
+    const channelLink = document.getElementById("channelLink").value.trim();
+
+    return `1. 영상 전달 해줄 수 있는 링크
+: ${videoLink}
+
+2. 원하는 영상의 길이
+: ${videoLength}
+
+3. 영상에 쓰일 소스 링크
+: ${sourceLink}
+
+4. 업로드 예정 채널 링크
+: ${channelLink}`;
+}
+
+function copyOrderForm(){
+    const text = getOrderText();
+
+    if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(text).then(showCopyResult);
+    }else{
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        temp.style.position = "fixed";
+        temp.style.left = "-9999px";
+        document.body.appendChild(temp);
+        temp.focus();
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        showCopyResult();
+    }
+}
+
+function showCopyResult(){
+    const result = document.getElementById("copyResult");
+    result.style.display = "block";
+
+    setTimeout(function(){
+        result.style.display = "none";
+    },3500);
+}
+</script>
+
 </body>
 </html>
