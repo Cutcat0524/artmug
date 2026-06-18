@@ -10,7 +10,7 @@
 html{scroll-behavior:smooth}
 body{
     font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
-    background:#050505;
+    background:#15120a;
     color:#fff;
     line-height:1.65;
 }
@@ -18,21 +18,19 @@ a{text-decoration:none;color:inherit}
 
 .page{
     background:
-    radial-gradient(circle at 10% 0%,rgba(255,208,0,.16),transparent 25%),
-    linear-gradient(180deg,#050505 0%,#111 45%,#050505 100%);
+    radial-gradient(circle at 12% 0%,rgba(255,208,0,.28),transparent 28%),
+    radial-gradient(circle at 90% 18%,rgba(255,208,0,.12),transparent 24%),
+    linear-gradient(180deg,#211b09 0%,#141414 38%,#1a160b 100%);
     overflow:hidden;
 }
 
 .section{
     width:min(1180px,calc(100% - 32px));
     margin:0 auto;
-    padding:70px 0;
+    padding:56px 0;
 }
 
-.title{
-    text-align:center;
-    margin-bottom:34px;
-}
+.title{text-align:center;margin-bottom:32px}
 .title .mini{
     color:#ffd000;
     font-size:13px;
@@ -41,37 +39,112 @@ a{text-decoration:none;color:inherit}
 }
 .title h2{
     margin-top:8px;
-    font-size:clamp(32px,5vw,56px);
+    font-size:clamp(30px,5vw,54px);
     font-weight:950;
     letter-spacing:-2px;
 }
-.title p{
-    color:#aaa;
-    margin-top:10px;
-}
+.title p{color:#c7c0a5;margin-top:8px}
 
-.price-image-wrap{
+.price-banner-grid{
     display:grid;
-    gap:24px;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
 }
 
-.price-image{
-    width:100%;
-    display:block;
+.price-banner{
+    position:relative;
+    overflow:hidden;
     border-radius:26px;
-    border:1px solid rgba(255,208,0,.25);
-    box-shadow:0 20px 70px rgba(0,0,0,.5);
-    background:#111;
+    padding:34px;
+    min-height:390px;
+    background:
+    linear-gradient(135deg,rgba(255,208,0,.18),transparent 34%),
+    linear-gradient(145deg,#201b0c,#090909);
+    border:1px solid rgba(255,208,0,.35);
+    box-shadow:0 22px 70px rgba(0,0,0,.42);
+}
+
+.price-banner:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    repeating-linear-gradient(-12deg,rgba(255,208,0,.08) 0 2px,transparent 2px 15px);
+    opacity:.45;
+    pointer-events:none;
+}
+
+.price-label{
+    position:relative;
+    z-index:1;
+    display:inline-block;
+    background:#ffd000;
+    color:#111;
+    border-radius:999px;
+    padding:7px 14px;
+    font-weight:950;
+    font-size:13px;
+    margin-bottom:24px;
+}
+
+.big-title{
+    position:relative;
+    z-index:1;
+    font-size:clamp(54px,8vw,88px);
+    line-height:.92;
+    font-weight:950;
+    letter-spacing:-4px;
+    color:#ffd000;
+    margin-bottom:22px;
+}
+
+.big-title span{color:#fff}
+
+.price-list{
+    position:relative;
+    z-index:1;
+    display:grid;
+    gap:16px;
+    margin-top:26px;
+}
+
+.price-row{
+    background:#fff;
+    color:#111;
+    border-radius:18px;
+    overflow:hidden;
+    border:2px solid #ffd000;
+}
+
+.price-row-title{
+    background:#ffd000;
+    text-align:center;
+    font-size:20px;
+    font-weight:950;
+    padding:8px;
+}
+
+.price-row-body{
+    padding:18px;
+    text-align:center;
+    font-size:42px;
+    font-weight:950;
+    letter-spacing:-2px;
+}
+
+.price-row-body small{
+    font-size:17px;
+    font-weight:900;
 }
 
 .grid{display:grid;gap:18px}
 
 .card{
     border-radius:24px;
-    padding:28px;
-    background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
-    border:1px solid rgba(255,255,255,.12);
-    box-shadow:0 18px 52px rgba(0,0,0,.32);
+    padding:26px;
+    background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.035));
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 18px 52px rgba(0,0,0,.25);
     position:relative;
     overflow:hidden;
 }
@@ -84,14 +157,8 @@ a{text-decoration:none;color:inherit}
     height:5px;
     background:linear-gradient(90deg,#ffd000,transparent);
 }
-.card h3{
-    font-size:22px;
-    margin-bottom:10px;
-}
-.card p{
-    color:#bdbdbd;
-    font-size:15px;
-}
+.card h3{font-size:22px;margin-bottom:10px}
+.card p{color:#d1cbb5;font-size:15px}
 
 .portfolio-grid{
     grid-template-columns:repeat(3,1fr);
@@ -103,8 +170,8 @@ a{text-decoration:none;color:inherit}
     border-radius:26px;
     overflow:hidden;
     background:#101010;
-    border:1px solid rgba(255,208,0,.25);
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    border:1px solid rgba(255,208,0,.28);
+    box-shadow:0 20px 60px rgba(0,0,0,.38);
 }
 .shorts-ratio{
     width:100%;
@@ -120,15 +187,14 @@ a{text-decoration:none;color:inherit}
     border:0;
 }
 .shorts-caption{
-    padding:15px 16px;
+    padding:14px 16px;
     font-weight:950;
     color:#ffd000;
     text-align:center;
 }
 
-.process-grid{
-    grid-template-columns:repeat(4,1fr);
-}
+.process-grid{grid-template-columns:repeat(4,1fr)}
+.notice-grid{grid-template-columns:repeat(2,1fr)}
 .process-num{
     color:#ffd000;
     font-weight:950;
@@ -136,35 +202,24 @@ a{text-decoration:none;color:inherit}
     margin-bottom:10px;
 }
 
-.notice-grid{
-    grid-template-columns:repeat(2,1fr);
-}
-
-.form-wrap{
-    max-width:780px;
-    margin:0 auto;
-}
+.form-wrap{max-width:780px;margin:0 auto}
 .form-box label{
     display:block;
     color:#ffd000;
     font-weight:950;
     margin:14px 0 7px;
 }
-.form-box input,
-.form-box textarea{
+.form-box input,.form-box textarea{
     width:100%;
-    border:1px solid rgba(255,255,255,.16);
-    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.08);
     color:#fff;
     border-radius:14px;
     padding:15px;
     font-size:15px;
     outline:none;
 }
-.form-box textarea{
-    min-height:86px;
-    resize:vertical;
-}
+.form-box textarea{min-height:86px;resize:vertical}
 .copy-btn{
     width:100%;
     min-height:58px;
@@ -182,8 +237,8 @@ a{text-decoration:none;color:inherit}
     margin-top:14px;
     padding:16px;
     border-radius:16px;
-    background:rgba(255,208,0,.1);
-    border:1px solid rgba(255,208,0,.35);
+    background:rgba(255,208,0,.12);
+    border:1px solid rgba(255,208,0,.38);
     color:#ffd000;
     text-align:center;
     font-weight:950;
@@ -191,41 +246,28 @@ a{text-decoration:none;color:inherit}
 
 .footer{
     text-align:center;
-    padding:60px 16px 90px;
-    color:#aaa;
+    padding:34px 16px 38px;
+    color:#c7c0a5;
 }
 .footer strong{
     display:block;
     color:#ffd000;
-    font-size:30px;
-    margin-bottom:8px;
+    font-size:28px;
+    margin-bottom:6px;
     font-weight:950;
 }
 
 @media(max-width:1024px){
-    .portfolio-grid{grid-template-columns:repeat(3,1fr)}
+    .price-banner-grid{grid-template-columns:1fr}
     .process-grid{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:720px){
-    .section{
-        width:min(100% - 24px,1180px);
-        padding:52px 0;
-    }
-    .portfolio-grid,
-    .process-grid,
-    .notice-grid{
-        grid-template-columns:1fr;
-    }
-    .card{
-        padding:22px;
-        border-radius:20px;
-    }
-    .shorts-box{
-        max-width:360px;
-        margin:0 auto;
-        width:100%;
-    }
+    .section{width:min(100% - 24px,1180px);padding:42px 0}
+    .portfolio-grid,.process-grid,.notice-grid{grid-template-columns:1fr}
+    .card{padding:22px;border-radius:20px}
+    .price-banner{padding:24px;min-height:auto}
+    .shorts-box{max-width:360px;margin:0 auto;width:100%}
 }
 </style>
 </head>
@@ -234,9 +276,36 @@ a{text-decoration:none;color:inherit}
 <div class="page">
 
 <section class="section">
-    <div class="price-image-wrap">
-        <img class="price-image" src="images/shorts-price.png" alt="쇼츠 편집 가격표">
-        <img class="price-image" src="images/longform-price.png" alt="롱폼 편집 가격표">
+    <div class="price-banner-grid">
+        <div class="price-banner">
+            <div class="price-label">SHORTS EDIT</div>
+            <div class="big-title">쇼츠<br><span>편집</span></div>
+            <div class="price-list">
+                <div class="price-row">
+                    <div class="price-row-title">편집점 O</div>
+                    <div class="price-row-body">7,000<small>원</small></div>
+                </div>
+                <div class="price-row">
+                    <div class="price-row-title">편집점 X</div>
+                    <div class="price-row-body">10,000<small>원</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-banner">
+            <div class="price-label">LONG FORM EDIT</div>
+            <div class="big-title">롱폼<br><span>편집</span></div>
+            <div class="price-list">
+                <div class="price-row">
+                    <div class="price-row-title">편집점 O</div>
+                    <div class="price-row-body">8,000<small>원 / 1분</small></div>
+                </div>
+                <div class="price-row">
+                    <div class="price-row-title">편집점 X</div>
+                    <div class="price-row-body">13,000<small>원 / 1분</small></div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -282,19 +351,16 @@ a{text-decoration:none;color:inherit}
             <h3>문의</h3>
             <p>아래 신청 양식을 작성한 후 아트머그 문의로 전달해주세요.</p>
         </div>
-
         <div class="card">
             <div class="process-num">02</div>
             <h3>확인 및 결제</h3>
             <p>전달해주신 내용을 확인한 후 작업 가능 여부와 금액을 안내드립니다.</p>
         </div>
-
         <div class="card">
             <div class="process-num">03</div>
             <h3>편집 작업</h3>
             <p>결제 확인 후 요청 내용에 맞춰 영상 편집을 진행합니다.</p>
         </div>
-
         <div class="card">
             <div class="process-num">04</div>
             <h3>완성본 전달</h3>
@@ -312,18 +378,11 @@ a{text-decoration:none;color:inherit}
     <div class="grid notice-grid">
         <div class="card">
             <h3>BGM 안내</h3>
-            <p>
-                영상 제작 시 저작권 표시가 필요한 BGM이 사용될 수 있습니다.
-                사용된 음원 라이선스에 따라 영상 설명란 또는 고정댓글 등에 출처 표기가 필요할 수 있습니다.
-            </p>
+            <p>영상 제작 시 저작권 표시가 필요한 BGM이 사용될 수 있습니다. 사용된 음원 라이선스에 따라 영상 설명란 또는 고정댓글 등에 출처 표기가 필요할 수 있습니다.</p>
         </div>
-
         <div class="card">
             <h3>저작권 안내</h3>
-            <p>
-                의뢰자님께서 제공해주신 일러스트, 이미지, 영상, 음원 등의 저작권 및 사용 권한에 대한 책임은 의뢰자님께 있습니다.
-                편집자는 제공받은 자료의 저작권 문제에 대한 책임을 지지 않습니다.
-            </p>
+            <p>의뢰자님께서 제공해주신 일러스트, 이미지, 영상, 음원 등의 저작권 및 사용 권한에 대한 책임은 의뢰자님께 있습니다. 편집자는 제공받은 자료의 저작권 문제에 대한 책임을 지지 않습니다.</p>
         </div>
     </div>
 </section>
@@ -408,10 +467,7 @@ function copyOrderForm(){
 function showCopyResult(){
     const result = document.getElementById("copyResult");
     result.style.display = "block";
-
-    setTimeout(function(){
-        result.style.display = "none";
-    },3500);
+    setTimeout(function(){result.style.display = "none";},3500);
 }
 </script>
 
