@@ -7,6 +7,7 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
     font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
     background:#050505;
@@ -31,6 +32,22 @@ body{
     width:min(980px,calc(100% - 32px));
     margin:0 auto;
     padding:42px 0;
+}
+
+.top-image-wrap{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.top-image-wrap img{
+    width:100%;
+    max-width:980px;
+    height:auto;
+    display:block;
+    border-radius:24px;
+    object-fit:contain;
 }
 
 .title{
@@ -167,6 +184,14 @@ body{
     .card{
         padding:22px;
     }
+
+    .top-image-wrap{
+        gap:14px;
+    }
+
+    .top-image-wrap img{
+        border-radius:18px;
+    }
 }
 </style>
 </head>
@@ -179,9 +204,9 @@ body{
     
 <section class="section" id="top-images">
     <div class="top-image-wrap">
-        <img src="상품설명1.png" alt="">
-        <img src="상품설명2.png" alt="">
-        <img src="상품설명3.png" alt="">
+        <img src="상품설명1.png" alt="상품설명1">
+        <img src="상품설명2.png" alt="상품설명2">
+        <img src="상품설명3.png" alt="상품설명3">
     </div>
 </section>
     
