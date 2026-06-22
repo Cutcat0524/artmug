@@ -1,330 +1,442 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CUTCAT 상세페이지</title>
+<div class="cutcat-page">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
+  <div class="section-title">
+    <img src="여기에_포트폴리오_이미지_URL.png" alt="포트폴리오">
+  </div>
 
-html,
-body{
-    margin:0;
-    padding:0;
-    background:transparent;
-    overflow-x:hidden;
-}
+  <section class="portfolio-box">
+    <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
 
-body{
-    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
-    background:#050505;
-    color:#fff;
-    line-height:1.65;
-}
+    <div class="cover-slider" id="coverSlider">
 
-.artmug-cursor-line{
-    width:100%;
-    min-height:28px;
-    line-height:28px;
-    background:#050505;
-    color:#050505;
-}
+      <div class="video-card" data-url="https://www.youtube.com/embed/여기에_유튜브_ID">
+        <div class="video-placeholder">영상 1</div>
+      </div>
 
-.page{
-    background:#050505;
-}
+      <div class="video-card active" data-url="https://www.youtube.com/embed/여기에_유튜브_ID">
+        <div class="video-placeholder">영상 2</div>
+      </div>
 
-.section{
-    width:min(980px,calc(100% - 32px));
-    margin:0 auto;
-    padding:42px 0;
-}
+      <div class="video-card" data-url="https://www.youtube.com/embed/여기에_유튜브_ID">
+        <div class="video-placeholder">영상 3</div>
+      </div>
 
-.top-image-wrap{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-}
-
-.top-image-wrap img{
-    width:100%;
-    max-width:980px;
-    height:auto;
-    display:block;
-    border-radius:24px;
-    object-fit:contain;
-}
-
-.title{
-    text-align:center;
-    margin-bottom:28px;
-}
-
-.title .mini{
-    color:#ffd000;
-    font-size:13px;
-    font-weight:950;
-    letter-spacing:2px;
-}
-
-.title h2{
-    margin-top:8px;
-    font-size:clamp(30px,5vw,54px);
-    font-weight:950;
-}
-
-.title p{
-    color:#aaa;
-    margin-top:8px;
-}
-
-.portfolio-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.shorts-box{
-    border-radius:24px;
-    overflow:hidden;
-    background:#0d0d0d;
-    border:1px solid rgba(255,208,0,.25);
-}
-
-.shorts-ratio{
-    width:100%;
-    aspect-ratio:9/16;
-    position:relative;
-    background:#111;
-}
-
-.shorts-ratio iframe{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    border:0;
-}
-
-.shorts-caption{
-    padding:14px;
-    color:#ffd000;
-    font-weight:950;
-    text-align:center;
-}
-
-.card{
-    width:100%;
-    border-radius:24px;
-    padding:26px;
-    background:#111;
-    border:1px solid rgba(255,208,0,.25);
-}
-
-.form-box label{
-    display:block;
-    color:#ffd000;
-    font-weight:950;
-    margin:14px 0 7px;
-}
-
-.form-box input,
-.form-box textarea{
-    width:100%;
-    border:1px solid rgba(255,208,0,.25);
-    background:#0b0b0b;
-    color:#fff;
-    border-radius:14px;
-    padding:15px;
-    font-size:15px;
-    outline:none;
-}
-
-.form-box textarea{
-    min-height:86px;
-    resize:vertical;
-}
-
-.copy-btn{
-    width:100%;
-    min-height:58px;
-    margin-top:20px;
-    border:0;
-    border-radius:16px;
-    background:#ffd000;
-    color:#111;
-    font-size:16px;
-    font-weight:950;
-    cursor:pointer;
-}
-
-.copy-result{
-    display:none;
-    margin-top:14px;
-    padding:16px;
-    border-radius:16px;
-    background:rgba(255,208,0,.12);
-    border:1px solid rgba(255,208,0,.38);
-    color:#ffd000;
-    text-align:center;
-    font-weight:950;
-}
-
-@media(max-width:720px){
-    .section{
-        width:min(100% - 24px,980px);
-        padding:32px 0;
-    }
-
-    .portfolio-grid{
-        grid-template-columns:1fr;
-    }
-
-    .shorts-box{
-        max-width:360px;
-        width:100%;
-        margin:0 auto;
-    }
-
-    .card{
-        padding:22px;
-    }
-
-    .top-image-wrap{
-        gap:14px;
-    }
-
-    .top-image-wrap img{
-        border-radius:18px;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<p class="artmug-cursor-line">&nbsp;</p>
-
-<div class="page">
-    
-<section class="section" id="top-images">
-    <div class="top-image-wrap">
-        <img src="상품설명1.png" alt="상품설명1">
-        <img src="수정_상품설명2.png" alt="상품설명2">
-        <img src="상품설명3.png" alt="상품설명3">
-    </div>
-</section>
-    
-<section class="section" id="portfolio">
-    <div class="title">
-        <div class="mini">PORTFOLIO</div>
-        <h2>포트폴리오</h2>
     </div>
 
-    <div class="portfolio-grid">
-        <div class="shorts-box">
-            <div class="shorts-ratio">
-                <iframe src="https://www.youtube.com/embed/8yPQJYA5pnE" allowfullscreen></iframe>
-            </div>
-            <div class="shorts-caption">쇼츠 포트폴리오 01</div>
-        </div>
+    <button class="slide-btn next" onclick="moveSlide(1)">›</button>
+  </section>
 
-        <div class="shorts-box">
-            <div class="shorts-ratio">
-                <iframe src="https://www.youtube.com/embed/WAgOGEd_LXM" allowfullscreen></iframe>
-            </div>
-            <div class="shorts-caption">쇼츠 포트폴리오 02</div>
-        </div>
 
-        <div class="shorts-box">
-            <div class="shorts-ratio">
-                <iframe src="https://www.youtube.com/embed/9Ha-4xZaA6w" allowfullscreen></iframe>
-            </div>
-            <div class="shorts-caption">쇼츠 포트폴리오 03</div>
-        </div>
-    </div>
-</section>
+  <div class="section-title">
+    <img src="여기에_신청양식_이미지_URL.png" alt="신청양식">
+  </div>
 
-<section class="section" id="form">
-    <div class="title">
-        <div class="mini">ORDER FORM</div>
-        <h2>신청 양식</h2>
-        <p>작성 후 복사하기 버튼을 누른 뒤, 아트머그 문의로 전달해주세요.</p>
-    </div>
+  <section class="form-box">
 
-    <div class="card form-box">
-        <label>1. 영상 전달 해줄 수 있는 링크</label>
-        <input id="videoLink" type="text" placeholder="예: 구글드라이브, 유튜브 일부공개, 파일 링크 등">
+    <label>1. 업로드 채널 링크 <span>유튜브, 치지직 등</span></label>
+    <input id="q1" placeholder="예: 유튜브 / 치지직 링크">
 
-        <label>2. 원하는 영상의 길이</label>
-        <input id="videoLength" type="text" placeholder="예: 쇼츠 60초 / 쇼츠 180초 / 롱폼 5분 등">
+    <label>2. 영상 종류 <span>롱폼 / 쇼츠</span></label>
+    <input id="q2" placeholder="예: 쇼츠">
 
-        <label>3. 영상에 쓰일 소스 링크</label>
-        <textarea id="sourceLink" placeholder="예: 인트로 영상, 아웃트로, 이미지, 로고, 일러스트, 효과음 링크 등"></textarea>
+    <label>3. 영상 주제 <span>게임, 저챗 등</span></label>
+    <input id="q3" placeholder="예: 공포게임 / 저챗 / 합방">
 
-        <label>4. 업로드 예정 채널 링크</label>
-        <input id="channelLink" type="text" placeholder="예: 유튜브, 치지직, 트위치, 틱톡, 인스타 등">
+    <label>4. 편집점 유무</label>
+    <input id="q4" placeholder="예: 있음 / 없음">
 
-        <button class="copy-btn" type="button" onclick="copyOrderForm()">신청 양식 복사하기</button>
+    <label>5. 영상 등장 인원수</label>
+    <input id="q5" placeholder="예: 1명 / 3명 / 4명">
 
-        <div id="copyResult" class="copy-result">
-            복사 완료되었습니다.<br>
-            이걸로 아트머그에 문의 후 신청해주세요.
-        </div>
-    </div>
-</section>
+    <label>6. 참고 영상 링크</label>
+    <input id="q6" placeholder="원하시는 스타일의 영상 링크">
+
+    <label>7. 원하시는 영상 길이</label>
+    <input id="q7" placeholder="예: 1분 내외 / 10분 내외">
+
+    <button class="copy-btn" onclick="copyForm()">작성한 양식 복사하기</button>
+
+  </section>
 
 </div>
 
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.cutcat-page {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px 16px;
+  background: #fff;
+  font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+  color: #222;
+}
+
+.section-title {
+  text-align: center;
+  margin: 45px 0 24px;
+}
+
+.section-title img {
+  max-width: 420px;
+  width: 80%;
+  height: auto;
+  display: inline-block;
+}
+
+.portfolio-box {
+  position: relative;
+  width: 100%;
+  min-height: 430px;
+  padding: 44px 70px;
+  border: 2px solid rgba(254,169,12,0.22);
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.cover-slider {
+  position: relative;
+  width: 100%;
+  height: 330px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+}
+
+.video-card {
+  position: absolute;
+  width: 210px;
+  height: 300px;
+  border-radius: 22px;
+  background: #f8f8f8;
+  border: 1px solid #f1f1f1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.45s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  opacity: 0.45;
+  filter: blur(1.2px) grayscale(0.25);
+  transform: scale(0.82);
+  z-index: 1;
+}
+
+.video-card.active {
+  opacity: 1;
+  filter: none;
+  transform: scale(1);
+  z-index: 5;
+  box-shadow: 0 16px 38px rgba(0,0,0,0.18);
+}
+
+.video-card.prev-card {
+  transform: translateX(-230px) scale(0.82);
+}
+
+.video-card.next-card {
+  transform: translateX(230px) scale(0.82);
+}
+
+.video-card.hide-left {
+  transform: translateX(-430px) scale(0.72);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.video-card.hide-right {
+  transform: translateX(430px) scale(0.72);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: #444;
+  background:
+    linear-gradient(135deg, rgba(254,169,12,0.18), rgba(1,181,162,0.16)),
+    #fff;
+}
+
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgba(254,169,12,0.25);
+  border-radius: 50%;
+  background: #fff;
+  color: #fea90c;
+  font-size: 34px;
+  line-height: 36px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+}
+
+.slide-btn:hover {
+  background: #fff8ea;
+}
+
+.prev {
+  left: 18px;
+}
+
+.next {
+  right: 18px;
+}
+
+.form-box {
+  width: 100%;
+  padding: 38px 42px;
+  border: 2px solid rgba(254,169,12,0.22);
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.04);
+}
+
+.form-box label {
+  display: block;
+  margin: 24px 0 9px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #222;
+}
+
+.form-box label:first-child {
+  margin-top: 0;
+}
+
+.form-box span {
+  margin-left: 6px;
+  color: #01b5a2;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-box input {
+  width: 100%;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid rgba(254,169,12,0.22);
+  border-radius: 16px;
+  background: #fffdf8;
+  font-size: 14px;
+  outline: none;
+}
+
+.form-box input:focus {
+  border-color: #fea90c;
+  box-shadow: 0 0 0 3px rgba(254,169,12,0.12);
+}
+
+.copy-btn {
+  width: 100%;
+  height: 56px;
+  margin-top: 34px;
+  border: 0;
+  border-radius: 16px;
+  background: #fea90c;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  filter: brightness(0.96);
+}
+
+@media (max-width: 700px) {
+  .portfolio-box {
+    min-height: 380px;
+    padding: 34px 48px;
+  }
+
+  .cover-slider {
+    height: 300px;
+  }
+
+  .video-card {
+    width: 170px;
+    height: 255px;
+  }
+
+  .video-card.prev-card {
+    transform: translateX(-145px) scale(0.78);
+  }
+
+  .video-card.next-card {
+    transform: translateX(145px) scale(0.78);
+  }
+
+  .video-card.hide-left {
+    transform: translateX(-280px) scale(0.7);
+  }
+
+  .video-card.hide-right {
+    transform: translateX(280px) scale(0.7);
+  }
+
+  .form-box {
+    padding: 30px 22px;
+  }
+
+  .slide-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 28px;
+  }
+}
+</style>
+
 <script>
-function getOrderText(){
-    const videoLink = document.getElementById("videoLink").value.trim();
-    const videoLength = document.getElementById("videoLength").value.trim();
-    const sourceLink = document.getElementById("sourceLink").value.trim();
-    const channelLink = document.getElementById("channelLink").value.trim();
+const cards = Array.from(document.querySelectorAll(".video-card"));
+let currentIndex = 1;
 
-    return `1. 영상 전달 해줄 수 있는 링크
-: ${videoLink}
+function updateCards() {
+  cards.forEach((card, index) => {
+    card.classList.remove("active", "prev-card", "next-card", "hide-left", "hide-right");
 
-2. 원하는 영상의 길이
-: ${videoLength}
-
-3. 영상에 쓰일 소스 링크
-: ${sourceLink}
-
-4. 업로드 예정 채널 링크
-: ${channelLink}`;
-}
-
-function copyOrderForm(){
-    const text = getOrderText();
-
-    if(navigator.clipboard && window.isSecureContext){
-        navigator.clipboard.writeText(text).then(showCopyResult);
-    }else{
-        const temp = document.createElement("textarea");
-        temp.value = text;
-        temp.style.position = "fixed";
-        temp.style.left = "-9999px";
-        document.body.appendChild(temp);
-        temp.focus();
-        temp.select();
-        document.execCommand("copy");
-        document.body.removeChild(temp);
-        showCopyResult();
+    if (index === currentIndex) {
+      card.classList.add("active");
+    } else if (index === currentIndex - 1) {
+      card.classList.add("prev-card");
+    } else if (index === currentIndex + 1) {
+      card.classList.add("next-card");
+    } else if (index < currentIndex) {
+      card.classList.add("hide-left");
+    } else {
+      card.classList.add("hide-right");
     }
+  });
 }
 
-function showCopyResult(){
-    const result = document.getElementById("copyResult");
-    result.style.display = "block";
-    setTimeout(function(){
-        result.style.display = "none";
-    },3500);
+function stopAllVideos() {
+  cards.forEach(card => {
+    const iframe = card.querySelector("iframe");
+    if (iframe) {
+      const url = card.getAttribute("data-url");
+      card.innerHTML = `<div class="video-placeholder">영상 ${cards.indexOf(card) + 1}</div>`;
+    }
+  });
 }
+
+function moveSlide(direction) {
+  currentIndex += direction;
+
+  if (currentIndex < 0) {
+    currentIndex = cards.length - 1;
+  }
+
+  if (currentIndex >= cards.length) {
+    currentIndex = 0;
+  }
+
+  stopAllVideos();
+  updateCards();
+}
+
+cards.forEach((card, index) => {
+  card.addEventListener("click", function() {
+    if (index !== currentIndex) {
+      currentIndex = index;
+      stopAllVideos();
+      updateCards();
+      return;
+    }
+
+    const url = this.getAttribute("data-url");
+
+    if (!this.querySelector("iframe")) {
+      this.innerHTML = `
+        <iframe 
+          src="${url}?autoplay=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      `;
+    }
+  });
+});
+
+const sliderArea = document.getElementById("coverSlider");
+
+sliderArea.addEventListener("wheel", function(e) {
+  e.preventDefault();
+
+  if (e.deltaY > 0 || e.deltaX > 0) {
+    moveSlide(1);
+  } else {
+    moveSlide(-1);
+  }
+}, { passive: false });
+
+let startX = 0;
+
+sliderArea.addEventListener("touchstart", function(e) {
+  startX = e.touches[0].clientX;
+});
+
+sliderArea.addEventListener("touchend", function(e) {
+  const endX = e.changedTouches[0].clientX;
+  const diff = startX - endX;
+
+  if (Math.abs(diff) > 40) {
+    if (diff > 0) {
+      moveSlide(1);
+    } else {
+      moveSlide(-1);
+    }
+  }
+});
+
+function copyForm() {
+  const text =
+`1. 업로드 채널 링크
+${document.getElementById("q1").value}
+
+2. 영상 종류
+${document.getElementById("q2").value}
+
+3. 영상 주제
+${document.getElementById("q3").value}
+
+4. 편집점 유무
+${document.getElementById("q4").value}
+
+5. 영상 등장 인원수
+${document.getElementById("q5").value}
+
+6. 참고 영상 링크
+${document.getElementById("q6").value}
+
+7. 원하시는 영상 길이
+${document.getElementById("q7").value}`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert("문의 시 붙여넣기 해주세요");
+  });
+}
+
+updateCards();
 </script>
-
-</body>
-</html>
