@@ -21,7 +21,6 @@
     <section class="form-box">
 
       <div class="form-row">
-        <div class="num">01</div>
         <div class="field">
           <label>업로드 채널 링크</label>
           <input id="q1" placeholder="예: 유튜브 / 치지직 링크">
@@ -29,7 +28,6 @@
       </div>
 
       <div class="form-row">
-        <div class="num">02</div>
         <div class="field">
           <label>영상 종류</label>
           <div class="choice-wrap" data-target="q2" data-etc="q2_etc">
@@ -43,7 +41,6 @@
       </div>
 
       <div class="form-row">
-        <div class="num">03</div>
         <div class="field">
           <label>영상 주제</label>
           <input id="q3" placeholder="예: 공포게임 / 저챗 / 합방">
@@ -51,7 +48,6 @@
       </div>
 
       <div class="form-row">
-        <div class="num">04</div>
         <div class="field">
           <label>편집점 유무</label>
           <div class="choice-wrap" data-target="q4" data-etc="q4_etc">
@@ -65,7 +61,6 @@
       </div>
 
       <div class="form-row">
-        <div class="num">05</div>
         <div class="field">
           <label>영상 등장 인원수</label>
           <div class="choice-wrap" data-target="q5" data-etc="q5_etc">
@@ -81,7 +76,6 @@
       </div>
 
       <div class="form-row">
-        <div class="num">06</div>
         <div class="field">
           <label>참고 영상 링크</label>
           <input id="q6" placeholder="원하시는 스타일의 영상 링크">
@@ -89,7 +83,6 @@
       </div>
 
       <div class="form-row">
-        <div class="num">07</div>
         <div class="field">
           <label>원하시는 영상 길이</label>
           <div class="choice-wrap" data-target="q7" data-etc="q7">
@@ -120,10 +113,7 @@
   max-width: 1040px;
   margin: 0 auto;
   padding: 42px 16px 54px;
-  background:
-    radial-gradient(circle at top left, rgba(254,169,12,0.09), transparent 34%),
-    radial-gradient(circle at bottom right, rgba(1,181,162,0.08), transparent 32%),
-    #fff;
+  background: #fff;
   font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
   color: #222;
 }
@@ -161,25 +151,7 @@
 }
 
 .form-row {
-  display: grid;
-  grid-template-columns: 58px 1fr;
-  gap: 14px;
-  align-items: stretch;
   margin-bottom: 14px;
-}
-
-.num {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: #fea90c;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 950;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 18px rgba(254,169,12,0.24);
 }
 
 .field {
@@ -253,9 +225,9 @@
 }
 
 .copy-btn {
-  width: calc(100% - 72px);
+  width: 100%;
   height: 58px;
-  margin: 26px 0 0 72px;
+  margin-top: 26px;
   border: 0;
   border-radius: 16px;
   background: #fea90c;
@@ -430,15 +402,7 @@
   }
 
   .form-row {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .num {
-    width: 44px;
-    height: 34px;
-    border-radius: 12px;
-    font-size: 13px;
+    margin-bottom: 14px;
   }
 
   .field {
