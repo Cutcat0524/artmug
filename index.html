@@ -1,19 +1,6 @@
 <div class="cutcat-page">
 
   <div class="section-title">
-    <img src="포폴.png" alt="포트폴리오">
-  </div>
-
-  <section class="portfolio-box">
-    <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
-
-    <div class="cover-slider" id="coverSlider"></div>
-
-    <button class="slide-btn next" onclick="moveSlide(1)">›</button>
-  </section>
-
-
-  <div class="section-title">
     <img src="신청.png" alt="신청양식">
   </div>
 
@@ -40,8 +27,19 @@
     <label>7. 원하시는 영상 길이</label>
     <input id="q7" placeholder="예: 1분 내외 / 10분 내외">
 
-    <button class="copy-btn" onclick="copyForm()">작성한 양식 복사하기</button>
+    <button type="button" class="copy-btn" onclick="copyForm()">작성한 양식 복사하기</button>
 
+  </section>
+
+
+  <div class="section-title">
+    <img src="포폴.png" alt="포트폴리오">
+  </div>
+
+  <section class="portfolio-box">
+    <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
+    <div class="cover-slider" id="coverSlider"></div>
+    <button class="slide-btn next" onclick="moveSlide(1)">›</button>
   </section>
 
 </div>
@@ -66,6 +64,10 @@
   margin: 45px 0 24px;
 }
 
+.section-title:first-child {
+  margin-top: 0;
+}
+
 .section-title img {
   max-width: 420px;
   width: 80%;
@@ -73,15 +75,19 @@
   display: inline-block;
 }
 
-.portfolio-box {
-  position: relative;
+.portfolio-box,
+.form-box {
   width: 100%;
-  min-height: 430px;
-  padding: 44px 70px;
   border: 2px solid rgba(254,169,12,0.22);
   border-radius: 28px;
   background: #fff;
   box-shadow: 0 10px 35px rgba(0,0,0,0.04);
+}
+
+.portfolio-box {
+  position: relative;
+  min-height: 430px;
+  padding: 44px 70px;
   overflow: hidden;
 }
 
@@ -209,12 +215,7 @@
 }
 
 .form-box {
-  width: 100%;
   padding: 38px 42px;
-  border: 2px solid rgba(254,169,12,0.22);
-  border-radius: 28px;
-  background: #fff;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.04);
 }
 
 .form-box label {
@@ -313,25 +314,10 @@
 </style>
 
 <script>
-/*
-  영상 추가는 여기만 수정하면 됩니다.
-
-  예시:
-  https://www.youtube.com/shorts/HT30gZN2Qrg
-
-  여기서 HT30gZN2Qrg 부분만 아래 배열에 추가하세요.
-*/
-
 const portfolioVideos = [
   "HT30gZN2Qrg",
   "9Ha-4xZaA6w",
   "WAgOGEd_LXM"
-
-  /* 추가 예시
-  ,"새영상ID"
-  ,"새영상ID"
-  ,"새영상ID"
-  */
 ];
 
 const sliderArea = document.getElementById("coverSlider");
@@ -406,13 +392,8 @@ function getPosition(index) {
   const total = cards.length;
   let diff = index - currentIndex;
 
-  if (diff > total / 2) {
-    diff -= total;
-  }
-
-  if (diff < -total / 2) {
-    diff += total;
-  }
+  if (diff > total / 2) diff -= total;
+  if (diff < -total / 2) diff += total;
 
   return diff;
 }
@@ -442,13 +423,8 @@ function moveSlide(direction) {
 
   currentIndex += direction;
 
-  if (currentIndex < 0) {
-    currentIndex = cards.length - 1;
-  }
-
-  if (currentIndex >= cards.length) {
-    currentIndex = 0;
-  }
+  if (currentIndex < 0) currentIndex = cards.length - 1;
+  if (currentIndex >= cards.length) currentIndex = 0;
 
   stopAllVideos();
   updateCards();
@@ -506,9 +482,35 @@ ${document.getElementById("q6").value}
 7. 원하시는 영상 길이
 ${document.getElementById("q7").value}`;
 
-  navigator.clipboard.writeText(text).then(() => {
-    alert("문의 시 붙여넣기 해주세요");
-  });
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(function() {
+      alert("복사되었습니다. 문의 시 붙여넣기 해주세요.");
+    }).catch(function() {
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  textarea.style.top = "0";
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+
+  try {
+    document.execCommand("copy");
+    alert("복사되었습니다. 문의 시 붙여넣기 해주세요.");
+  } catch (err) {
+    alert("자동 복사가 안 되었습니다. 입력하신 내용을 직접 드래그해서 복사해주세요.");
+  }
+
+  document.body.removeChild(textarea);
 }
 
 createVideoCards();
