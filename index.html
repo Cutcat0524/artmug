@@ -7,21 +7,7 @@
   <section class="portfolio-box">
     <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
 
-    <div class="cover-slider" id="coverSlider">
-
-      <div class="video-card" data-url="https://www.youtube.com/shorts/HT30gZN2Qrg?feature=share">
-        <div class="video-placeholder">영상 1</div>
-      </div>
-
-      <div class="video-card active" data-url="https://www.youtube.com/shorts/9Ha-4xZaA6w?feature=share">
-        <div class="video-placeholder">영상 2</div>
-      </div>
-
-      <div class="video-card" data-url="https://www.youtube.com/shorts/WAgOGEd_LXM?feature=share">
-        <div class="video-placeholder">영상 3</div>
-      </div>
-
-    </div>
+    <div class="cover-slider" id="coverSlider"></div>
 
     <button class="slide-btn next" onclick="moveSlide(1)">›</button>
   </section>
@@ -120,60 +106,77 @@
   cursor: pointer;
   transition: all 0.45s ease;
   box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-  opacity: 0.45;
+  opacity: 0;
+  pointer-events: none;
   filter: blur(1.2px) grayscale(0.25);
-  transform: scale(0.82);
+  transform: scale(0.72);
   z-index: 1;
 }
 
 .video-card.active {
   opacity: 1;
+  pointer-events: auto;
   filter: none;
-  transform: scale(1);
+  transform: translateX(0) scale(1);
   z-index: 5;
   box-shadow: 0 16px 38px rgba(0,0,0,0.18);
 }
 
 .video-card.prev-card {
+  opacity: 0.45;
+  pointer-events: auto;
   transform: translateX(-230px) scale(0.82);
+  z-index: 2;
 }
 
 .video-card.next-card {
+  opacity: 0.45;
+  pointer-events: auto;
   transform: translateX(230px) scale(0.82);
+  z-index: 2;
 }
 
 .video-card.hide-left {
   transform: translateX(-430px) scale(0.72);
   opacity: 0;
-  pointer-events: none;
 }
 
 .video-card.hide-right {
   transform: translateX(430px) scale(0.72);
   opacity: 0;
-  pointer-events: none;
+}
+
+.video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #fff8ea;
+}
+
+.play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 58px;
+  height: 58px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(254,169,12,0.92);
+  color: #fff;
+  font-size: 24px;
+  line-height: 58px;
+  text-align: center;
+  padding-left: 4px;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
 }
 
 .video-card iframe {
   width: 100%;
   height: 100%;
   border: 0;
-}
-
-.video-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 900;
-  color: #444;
-  background:
-    linear-gradient(135deg, rgba(254,169,12,0.18), rgba(1,181,162,0.16)),
-    #fff;
+  display: block;
 }
 
 .slide-btn {
@@ -310,20 +313,123 @@
 </style>
 
 <script>
-const cards = Array.from(document.querySelectorAll(".video-card"));
-let currentIndex = 1;
+/*
+  영상 추가는 여기만 수정하면 됩니다.
+
+  예시:
+  https://www.youtube.com/shorts/HT30gZN2Qrg
+
+  여기서 HT30gZN2Qrg 부분만 아래 배열에 추가하세요.
+*/
+
+const portfolioVideos = [
+  "HT30gZN2Qrg",
+  "9Ha-4xZaA6w",
+  "WAgOGEd_LXM"
+
+  /* 추가 예시
+  ,"새영상ID"
+  ,"새영상ID"
+  ,"새영상ID"
+  */
+];
+
+const sliderArea = document.getElementById("coverSlider");
+let currentIndex = 0;
+let cards = [];
+
+function createVideoCards() {
+  sliderArea.innerHTML = "";
+
+  portfolioVideos.forEach((id, index) => {
+    const card = document.createElement("div");
+    card.className = "video-card";
+    card.setAttribute("data-id", id);
+
+    card.innerHTML = `
+      <img class="video-thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="영상 ${index + 1}">
+      <div class="play-icon">▶</div>
+    `;
+
+    card.addEventListener("click", function() {
+      const clickedIndex = cards.indexOf(card);
+
+      if (clickedIndex !== currentIndex) {
+        currentIndex = clickedIndex;
+        stopAllVideos();
+        updateCards();
+        return;
+      }
+
+      playVideo(card);
+    });
+
+    sliderArea.appendChild(card);
+  });
+
+  cards = Array.from(document.querySelectorAll(".video-card"));
+}
+
+function makeThumb(card) {
+  const id = card.getAttribute("data-id");
+  const number = cards.indexOf(card) + 1;
+
+  card.innerHTML = `
+    <img class="video-thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="영상 ${number}">
+    <div class="play-icon">▶</div>
+  `;
+}
+
+function playVideo(card) {
+  const id = card.getAttribute("data-id");
+
+  if (!card.querySelector("iframe")) {
+    card.innerHTML = `
+      <iframe
+        src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    `;
+  }
+}
+
+function stopAllVideos() {
+  cards.forEach(card => {
+    if (card.querySelector("iframe")) {
+      makeThumb(card);
+    }
+  });
+}
+
+function getPosition(index) {
+  const total = cards.length;
+  let diff = index - currentIndex;
+
+  if (diff > total / 2) {
+    diff -= total;
+  }
+
+  if (diff < -total / 2) {
+    diff += total;
+  }
+
+  return diff;
+}
 
 function updateCards() {
   cards.forEach((card, index) => {
     card.classList.remove("active", "prev-card", "next-card", "hide-left", "hide-right");
 
-    if (index === currentIndex) {
+    const pos = getPosition(index);
+
+    if (pos === 0) {
       card.classList.add("active");
-    } else if (index === currentIndex - 1) {
+    } else if (pos === -1) {
       card.classList.add("prev-card");
-    } else if (index === currentIndex + 1) {
+    } else if (pos === 1) {
       card.classList.add("next-card");
-    } else if (index < currentIndex) {
+    } else if (pos < 0) {
       card.classList.add("hide-left");
     } else {
       card.classList.add("hide-right");
@@ -331,17 +437,9 @@ function updateCards() {
   });
 }
 
-function stopAllVideos() {
-  cards.forEach(card => {
-    const iframe = card.querySelector("iframe");
-    if (iframe) {
-      const url = card.getAttribute("data-url");
-      card.innerHTML = `<div class="video-placeholder">영상 ${cards.indexOf(card) + 1}</div>`;
-    }
-  });
-}
-
 function moveSlide(direction) {
+  if (cards.length <= 1) return;
+
   currentIndex += direction;
 
   if (currentIndex < 0) {
@@ -355,31 +453,6 @@ function moveSlide(direction) {
   stopAllVideos();
   updateCards();
 }
-
-cards.forEach((card, index) => {
-  card.addEventListener("click", function() {
-    if (index !== currentIndex) {
-      currentIndex = index;
-      stopAllVideos();
-      updateCards();
-      return;
-    }
-
-    const url = this.getAttribute("data-url");
-
-    if (!this.querySelector("iframe")) {
-      this.innerHTML = `
-        <iframe 
-          src="${url}?autoplay=1"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      `;
-    }
-  });
-});
-
-const sliderArea = document.getElementById("coverSlider");
 
 sliderArea.addEventListener("wheel", function(e) {
   e.preventDefault();
@@ -438,5 +511,6 @@ ${document.getElementById("q7").value}`;
   });
 }
 
+createVideoCards();
 updateCards();
 </script>
