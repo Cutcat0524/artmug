@@ -1,46 +1,112 @@
 <div class="cutcat-page">
 
-  <div class="section-title">
-    <img src="신청.png" alt="신청양식">
+  <div class="cutcat-section portfolio-area">
+    <div class="section-title">
+      <img src="포폴.png" alt="포트폴리오">
+    </div>
+
+    <section class="portfolio-box">
+      <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
+      <div class="cover-slider" id="coverSlider"></div>
+      <button class="slide-btn next" onclick="moveSlide(1)">›</button>
+    </section>
   </div>
 
-  <section class="form-box">
 
-    <label>1. 업로드 채널 링크 <span>유튜브, 치지직 등</span></label>
-    <input id="q1" placeholder="예: 유튜브 / 치지직 링크">
+  <div class="cutcat-section form-area">
+    <div class="section-title">
+      <img src="신청.png" alt="신청양식">
+    </div>
 
-    <label>2. 영상 종류 <span>롱폼 / 쇼츠</span></label>
-    <input id="q2" placeholder="예: 쇼츠">
+    <section class="form-box">
 
-    <label>3. 영상 주제 <span>게임, 저챗 등</span></label>
-    <input id="q3" placeholder="예: 공포게임 / 저챗 / 합방">
+      <div class="form-row">
+        <div class="num">01</div>
+        <div class="field">
+          <label>업로드 채널 링크</label>
+          <input id="q1" placeholder="예: 유튜브 / 치지직 링크">
+        </div>
+      </div>
 
-    <label>4. 편집점 유무</label>
-    <input id="q4" placeholder="예: 있음 / 없음">
+      <div class="form-row">
+        <div class="num">02</div>
+        <div class="field">
+          <label>영상 종류</label>
+          <div class="choice-wrap" data-target="q2" data-etc="q2_etc">
+            <button type="button" onclick="selectChoice(this)">쇼츠</button>
+            <button type="button" onclick="selectChoice(this)">롱폼</button>
+            <button type="button" onclick="selectChoice(this)">기타</button>
+          </div>
+          <input id="q2" type="hidden">
+          <input id="q2_etc" class="etc-input" placeholder="기타 내용을 입력해주세요">
+        </div>
+      </div>
 
-    <label>5. 영상 등장 인원수</label>
-    <input id="q5" placeholder="예: 1명 / 3명 / 4명">
+      <div class="form-row">
+        <div class="num">03</div>
+        <div class="field">
+          <label>영상 주제</label>
+          <input id="q3" placeholder="예: 공포게임 / 저챗 / 합방">
+        </div>
+      </div>
 
-    <label>6. 참고 영상 링크</label>
-    <input id="q6" placeholder="원하시는 스타일의 영상 링크">
+      <div class="form-row">
+        <div class="num">04</div>
+        <div class="field">
+          <label>편집점 유무</label>
+          <div class="choice-wrap" data-target="q4" data-etc="q4_etc">
+            <button type="button" onclick="selectChoice(this)">있음</button>
+            <button type="button" onclick="selectChoice(this)">없음</button>
+            <button type="button" onclick="selectChoice(this)">기타</button>
+          </div>
+          <input id="q4" type="hidden">
+          <input id="q4_etc" class="etc-input" placeholder="기타 내용을 입력해주세요">
+        </div>
+      </div>
 
-    <label>7. 원하시는 영상 길이</label>
-    <input id="q7" placeholder="예: 1분 내외 / 10분 내외">
+      <div class="form-row">
+        <div class="num">05</div>
+        <div class="field">
+          <label>영상 등장 인원수</label>
+          <div class="choice-wrap" data-target="q5" data-etc="q5_etc">
+            <button type="button" onclick="selectChoice(this)">1명</button>
+            <button type="button" onclick="selectChoice(this)">2명</button>
+            <button type="button" onclick="selectChoice(this)">3명</button>
+            <button type="button" onclick="selectChoice(this)">4명 이상</button>
+            <button type="button" onclick="selectChoice(this)">기타</button>
+          </div>
+          <input id="q5" type="hidden">
+          <input id="q5_etc" class="etc-input" placeholder="기타 내용을 입력해주세요">
+        </div>
+      </div>
 
-    <button type="button" class="copy-btn" onclick="copyForm()">작성한 양식 복사하기</button>
+      <div class="form-row">
+        <div class="num">06</div>
+        <div class="field">
+          <label>참고 영상 링크</label>
+          <input id="q6" placeholder="원하시는 스타일의 영상 링크">
+        </div>
+      </div>
 
-  </section>
+      <div class="form-row">
+        <div class="num">07</div>
+        <div class="field">
+          <label>원하시는 영상 길이</label>
+          <div class="choice-wrap" data-target="q7" data-etc="q7">
+            <button type="button" onclick="selectChoice(this)">30초 내외</button>
+            <button type="button" onclick="selectChoice(this)">1분 내외</button>
+            <button type="button" onclick="selectChoice(this)">5분 내외</button>
+            <button type="button" onclick="selectChoice(this)">10분 내외</button>
+            <button type="button" onclick="selectChoice(this)">기타</button>
+          </div>
+          <input id="q7" class="etc-input" placeholder="기타 또는 직접 입력">
+        </div>
+      </div>
 
+      <button type="button" class="copy-btn" onclick="copyForm()">작성한 양식 복사하기</button>
 
-  <div class="section-title">
-    <img src="포폴.png" alt="포트폴리오">
+    </section>
   </div>
-
-  <section class="portfolio-box">
-    <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
-    <div class="cover-slider" id="coverSlider"></div>
-    <button class="slide-btn next" onclick="moveSlide(1)">›</button>
-  </section>
 
 </div>
 
@@ -51,70 +117,205 @@
 
 .cutcat-page {
   width: 100%;
-  max-width: 980px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 40px 16px;
-  background: #fff;
+  padding: 42px 16px 54px;
+  background:
+    radial-gradient(circle at top left, rgba(254,169,12,0.09), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(1,181,162,0.08), transparent 32%),
+    #fff;
   font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
   color: #222;
 }
 
-.section-title {
-  text-align: center;
-  margin: 45px 0 24px;
+.cutcat-section {
+  position: relative;
+  margin-bottom: 95px;
 }
 
-.section-title:first-child {
-  margin-top: 0;
+.cutcat-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  text-align: center;
+  margin: 0 0 24px;
 }
 
 .section-title img {
-  max-width: 420px;
-  width: 80%;
+  max-width: 410px;
+  width: 78%;
   height: auto;
   display: inline-block;
 }
 
-.portfolio-box,
 .form-box {
+  position: relative;
   width: 100%;
-  border: 2px solid rgba(254,169,12,0.22);
-  border-radius: 28px;
+  padding: 30px;
+  border: 2px solid rgba(254,169,12,0.26);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255,253,248,0.96), rgba(255,255,255,0.98));
+  box-shadow: 0 18px 45px rgba(0,0,0,0.06);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 14px;
+  align-items: stretch;
+  margin-bottom: 14px;
+}
+
+.num {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #fea90c;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(254,169,12,0.24);
+}
+
+.field {
+  padding: 16px 18px;
+  border: 1px solid rgba(254,169,12,0.2);
+  border-radius: 18px;
   background: #fff;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.04);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.035);
+}
+
+.field label {
+  display: block;
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 900;
+  color: #222;
+}
+
+.field input {
+  width: 100%;
+  height: 44px;
+  padding: 0 15px;
+  border: 1px solid rgba(254,169,12,0.25);
+  border-radius: 12px;
+  background: #fffdf8;
+  font-size: 14px;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #fea90c;
+  box-shadow: 0 0 0 4px rgba(254,169,12,0.13);
+}
+
+.choice-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.choice-wrap button {
+  min-height: 38px;
+  padding: 0 15px;
+  border: 1px solid rgba(254,169,12,0.34);
+  border-radius: 999px;
+  background: #fffdf8;
+  color: #333;
+  font-size: 13px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.choice-wrap button:hover {
+  background: #fff8ea;
+}
+
+.choice-wrap button.selected {
+  background: #fea90c;
+  color: #fff;
+  border-color: #fea90c;
+  box-shadow: 0 7px 16px rgba(254,169,12,0.24);
+}
+
+.etc-input {
+  display: none;
+  margin-top: 10px;
+}
+
+.etc-input.show {
+  display: block;
+}
+
+.copy-btn {
+  width: calc(100% - 72px);
+  height: 58px;
+  margin: 26px 0 0 72px;
+  border: 0;
+  border-radius: 16px;
+  background: #fea90c;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 950;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(254,169,12,0.24);
+}
+
+.copy-btn:hover {
+  filter: brightness(0.96);
 }
 
 .portfolio-box {
   position: relative;
-  min-height: 430px;
-  padding: 44px 70px;
+  width: 100%;
+  min-height: 440px;
+  padding: 48px 78px;
+  border: 2px solid rgba(254,169,12,0.26);
+  border-radius: 14px 34px 14px 34px;
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.06);
   overflow: hidden;
+}
+
+.portfolio-box:before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed rgba(254,169,12,0.28);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .cover-slider {
   position: relative;
   width: 100%;
-  height: 330px;
+  height: 335px;
   display: flex;
   align-items: center;
   justify-content: center;
   touch-action: pan-y;
+  z-index: 2;
 }
 
 .video-card {
   position: absolute;
-  width: 210px;
-  height: 300px;
-  border-radius: 22px;
+  width: 220px;
+  height: 305px;
+  border-radius: 28px 10px 28px 10px;
   background: #f8f8f8;
-  border: 1px solid #f1f1f1;
+  border: 2px solid rgba(255,255,255,0.9);
   overflow: hidden;
   cursor: pointer;
   transition: all 0.45s ease;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 14px 26px rgba(0,0,0,0.14);
   opacity: 0;
   pointer-events: none;
-  filter: blur(1.2px) grayscale(0.25);
+  filter: blur(1.2px) grayscale(0.22);
   transform: scale(0.72);
   z-index: 1;
 }
@@ -123,32 +324,32 @@
   opacity: 1;
   pointer-events: auto;
   filter: none;
-  transform: translateX(0) scale(1);
+  transform: translateX(0) rotate(0deg) scale(1);
   z-index: 5;
-  box-shadow: 0 16px 38px rgba(0,0,0,0.18);
+  box-shadow: 0 20px 42px rgba(0,0,0,0.2);
 }
 
 .video-card.prev-card {
-  opacity: 0.45;
+  opacity: 0.48;
   pointer-events: auto;
-  transform: translateX(-230px) scale(0.82);
+  transform: translateX(-245px) rotate(-5deg) scale(0.82);
   z-index: 2;
 }
 
 .video-card.next-card {
-  opacity: 0.45;
+  opacity: 0.48;
   pointer-events: auto;
-  transform: translateX(230px) scale(0.82);
+  transform: translateX(245px) rotate(5deg) scale(0.82);
   z-index: 2;
 }
 
 .video-card.hide-left {
-  transform: translateX(-430px) scale(0.72);
+  transform: translateX(-470px) rotate(-8deg) scale(0.7);
   opacity: 0;
 }
 
 .video-card.hide-right {
-  transform: translateX(430px) scale(0.72);
+  transform: translateX(470px) rotate(8deg) scale(0.7);
   opacity: 0;
 }
 
@@ -164,18 +365,18 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 58px;
-  height: 58px;
+  width: 60px;
+  height: 60px;
   transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: rgba(254,169,12,0.92);
+  border-radius: 20px 8px 20px 8px;
+  background: rgba(254,169,12,0.94);
   color: #fff;
   font-size: 24px;
-  line-height: 58px;
+  line-height: 60px;
   text-align: center;
   padding-left: 4px;
   font-weight: 900;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .video-card iframe {
@@ -189,91 +390,90 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border: 2px solid rgba(254,169,12,0.25);
-  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  border: 2px solid rgba(254,169,12,0.28);
+  border-radius: 16px 6px 16px 6px;
   background: #fff;
   color: #fea90c;
   font-size: 34px;
   line-height: 36px;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-}
-
-.slide-btn:hover {
-  background: #fff8ea;
+  box-shadow: 0 7px 18px rgba(0,0,0,0.08);
 }
 
 .prev {
-  left: 18px;
+  left: 20px;
 }
 
 .next {
-  right: 18px;
+  right: 20px;
 }
 
-.form-box {
-  padding: 38px 42px;
-}
+@media (max-width: 780px) {
+  .cutcat-page {
+    padding: 34px 13px 46px;
+  }
 
-.form-box label {
-  display: block;
-  margin: 24px 0 9px;
-  font-size: 16px;
-  font-weight: 800;
-  color: #222;
-}
+  .cutcat-section {
+    margin-bottom: 80px;
+  }
 
-.form-box label:first-child {
-  margin-top: 0;
-}
+  .section-title img {
+    width: 82%;
+  }
 
-.form-box span {
-  margin-left: 6px;
-  color: #01b5a2;
-  font-size: 13px;
-  font-weight: 700;
-}
+  .form-box {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
 
-.form-box input {
-  width: 100%;
-  height: 44px;
-  padding: 0 18px;
-  border: 1px solid rgba(254,169,12,0.22);
-  border-radius: 16px;
-  background: #fffdf8;
-  font-size: 14px;
-  outline: none;
-}
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 
-.form-box input:focus {
-  border-color: #fea90c;
-  box-shadow: 0 0 0 3px rgba(254,169,12,0.12);
-}
+  .num {
+    width: 44px;
+    height: 34px;
+    border-radius: 12px;
+    font-size: 13px;
+  }
 
-.copy-btn {
-  width: 100%;
-  height: 56px;
-  margin-top: 34px;
-  border: 0;
-  border-radius: 16px;
-  background: #fea90c;
-  color: #fff;
-  font-size: 17px;
-  font-weight: 900;
-  cursor: pointer;
-}
+  .field {
+    padding: 15px;
+    border-radius: 16px;
+  }
 
-.copy-btn:hover {
-  filter: brightness(0.96);
-}
+  .field label {
+    font-size: 14px;
+  }
 
-@media (max-width: 700px) {
+  .field input {
+    height: 43px;
+    font-size: 13px;
+  }
+
+  .choice-wrap button {
+    min-height: 36px;
+    font-size: 12px;
+    padding: 0 13px;
+  }
+
+  .copy-btn {
+    width: 100%;
+    margin-left: 0;
+  }
+
   .portfolio-box {
     min-height: 380px;
-    padding: 34px 48px;
+    padding: 36px 46px;
+    border-radius: 12px 26px 12px 26px;
+  }
+
+  .portfolio-box:before {
+    inset: 10px;
   }
 
   .cover-slider {
@@ -281,34 +481,58 @@
   }
 
   .video-card {
-    width: 170px;
-    height: 255px;
+    width: 172px;
+    height: 258px;
+    border-radius: 22px 9px 22px 9px;
   }
 
   .video-card.prev-card {
-    transform: translateX(-145px) scale(0.78);
+    transform: translateX(-138px) rotate(-5deg) scale(0.78);
   }
 
   .video-card.next-card {
-    transform: translateX(145px) scale(0.78);
-  }
-
-  .video-card.hide-left {
-    transform: translateX(-280px) scale(0.7);
-  }
-
-  .video-card.hide-right {
-    transform: translateX(280px) scale(0.7);
-  }
-
-  .form-box {
-    padding: 30px 22px;
+    transform: translateX(138px) rotate(5deg) scale(0.78);
   }
 
   .slide-btn {
     width: 38px;
     height: 38px;
     font-size: 28px;
+    line-height: 30px;
+  }
+
+  .prev {
+    left: 12px;
+  }
+
+  .next {
+    right: 12px;
+  }
+}
+
+@media (max-width: 430px) {
+  .portfolio-box {
+    padding: 32px 34px;
+  }
+
+  .video-card {
+    width: 154px;
+    height: 236px;
+  }
+
+  .video-card.prev-card {
+    transform: translateX(-112px) rotate(-5deg) scale(0.74);
+  }
+
+  .video-card.next-card {
+    transform: translateX(112px) rotate(5deg) scale(0.74);
+  }
+
+  .play-icon {
+    width: 52px;
+    height: 52px;
+    line-height: 52px;
+    font-size: 21px;
   }
 }
 </style>
@@ -319,6 +543,54 @@ const portfolioVideos = [
   "9Ha-4xZaA6w",
   "WAgOGEd_LXM"
 ];
+
+function selectChoice(btn) {
+  const wrap = btn.parentElement;
+  const targetId = wrap.getAttribute("data-target");
+  const etcId = wrap.getAttribute("data-etc");
+  const targetInput = document.getElementById(targetId);
+  const etcInput = etcId ? document.getElementById(etcId) : null;
+
+  wrap.querySelectorAll("button").forEach(button => {
+    button.classList.remove("selected");
+  });
+
+  btn.classList.add("selected");
+
+  if (btn.innerText === "기타") {
+    if (etcInput) {
+      etcInput.classList.add("show");
+      etcInput.focus();
+      targetInput.value = etcInput.value;
+    } else {
+      targetInput.value = "기타";
+    }
+  } else {
+    targetInput.value = btn.innerText;
+
+    if (etcInput && etcInput.classList.contains("etc-input")) {
+      if (etcId !== targetId) {
+        etcInput.value = "";
+      }
+      etcInput.classList.remove("show");
+    }
+  }
+}
+
+document.querySelectorAll(".etc-input").forEach(input => {
+  input.addEventListener("input", function() {
+    const wrap = this.parentElement.querySelector(".choice-wrap");
+    if (!wrap) return;
+
+    const selectedBtn = wrap.querySelector("button.selected");
+    const targetId = wrap.getAttribute("data-target");
+    const targetInput = document.getElementById(targetId);
+
+    if (selectedBtn && selectedBtn.innerText === "기타") {
+      targetInput.value = this.value;
+    }
+  });
+});
 
 const sliderArea = document.getElementById("coverSlider");
 let currentIndex = 0;
@@ -459,28 +731,32 @@ sliderArea.addEventListener("touchend", function(e) {
   }
 });
 
+function getAnswer(id) {
+  return document.getElementById(id).value;
+}
+
 function copyForm() {
   const text =
 `1. 업로드 채널 링크
-${document.getElementById("q1").value}
+${getAnswer("q1")}
 
 2. 영상 종류
-${document.getElementById("q2").value}
+${getAnswer("q2")}
 
 3. 영상 주제
-${document.getElementById("q3").value}
+${getAnswer("q3")}
 
 4. 편집점 유무
-${document.getElementById("q4").value}
+${getAnswer("q4")}
 
 5. 영상 등장 인원수
-${document.getElementById("q5").value}
+${getAnswer("q5")}
 
 6. 참고 영상 링크
-${document.getElementById("q6").value}
+${getAnswer("q6")}
 
 7. 원하시는 영상 길이
-${document.getElementById("q7").value}`;
+${getAnswer("q7")}`;
 
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text).then(function() {
